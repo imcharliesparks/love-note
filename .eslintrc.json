@@ -6,8 +6,8 @@
     },
     "extends": [
         "@meteorjs/eslint-config-meteor",
-        "eslint:recommended",
         "plugin:react/recommended",
+        "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended",
         "plugin:import/recommended",
@@ -43,9 +43,9 @@
             "never"
         ],
         "react/react-in-jsx-scope": "off",
-        "prettier/prettier": "error"
-        // "import/no-unresolved": ["error", { "ignore": ["^meteor/", "^/"] }]
-        
+        "prettier/prettier": "error",
+        "import/prefer-default-export": "off",
+        "react/function-component-definition": "off"
     },
     "ignorePatterns": [
         "node_modules",
