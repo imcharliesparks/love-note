@@ -1,8 +1,4 @@
 import React from 'react'
-
-export type TaskItem = {
-	_id: number
-	text: string
-}
+import { TaskItem } from '/shared/types'
 
 export const Task = ({ task }: { task: TaskItem }): React.ReactElement => <li>{task.text}</li>

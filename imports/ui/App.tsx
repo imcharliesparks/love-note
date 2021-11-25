@@ -1,18 +1,22 @@
+import { useTracker } from 'meteor/react-meteor-data'
 import React from 'react'
-import { Task, TaskItem } from './Task'
+import { TasksCollection } from '../api/tasks'
+import { Task } from './Task'
+import { TaskForm } from './TaskForm'
+import { TaskItem } from '/shared/types'
 
-const tasks: TaskItem[] = [
-	{ _id: 1, text: 'First Task' },
-	{ _id: 2, text: 'Second Task' },
-	{ _id: 3, text: 'Third Task' }
-]
+export const App = () => {
+	const tasks: TaskItem[] = useTracker(() => TasksCollection.find().fetch())
 
-export const App = () => (
-	<div>
-		<ul>
-			{tasks.map((task: TaskItem) => (
-				<Task task={task} key={task._id} />
-			))}
-		</ul>
-	</div>
-)
+	return (
+		<div>
+			<ul>
+				{tasks.map((task: TaskItem) => (
+					<Task task={task} key={task._id} />
+				))}
+			</ul>
+			<br />
+			<TaskForm />
+		</div>
+	)
+}
