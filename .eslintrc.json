@@ -46,7 +46,8 @@
         "prettier/prettier": "error",
         "import/prefer-default-export": "off",
         "react/function-component-definition": "off",
-        "react/destructuring-assignment": "off"
+        "react/destructuring-assignment": "off",
+        "no-console": "off"
     },
     "ignorePatterns": [
         "node_modules",
