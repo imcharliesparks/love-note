@@ -45,7 +45,8 @@
         "react/react-in-jsx-scope": "off",
         "prettier/prettier": "error",
         "import/prefer-default-export": "off",
-        "react/function-component-definition": "off"
+        "react/function-component-definition": "off",
+        "react/destructuring-assignment": "off"
     },
     "ignorePatterns": [
         "node_modules",

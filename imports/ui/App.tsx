@@ -1,11 +1,14 @@
-import React from 'react';
-import { Hello } from './Hello';
-import { Info } from './Info';
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { AuthPage } from './components/AuthPage'
+import ErrorBoundary from './components/ErrorBoundary'
 
 export const App = () => (
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <Hello />
-    <Info />
-  </div>
-);
+	<ErrorBoundary>
+		<Router>
+			<Routes>
+				<Route path="/" element={<AuthPage />} />
+			</Routes>
+		</Router>
+	</ErrorBoundary>
+)
