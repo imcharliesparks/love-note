@@ -1,9 +1,17 @@
+import { Meteor } from 'meteor/meteor'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { NotesMethods } from '/shared/constants'
 
 export const CreateNote = (): React.ReactElement => {
 	const [note, setNote] = React.useState<string>('')
-	const handleOnSubmit = (): void => {
-		console.log('note', note)
+	const navigate = useNavigate()
+
+	const handleOnSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
+		e.preventDefault()
+		Meteor.call(NotesMethods.INSERT, note, () => {
+			navigate('/my-notes')
+		})
 	}
 
 	return (
