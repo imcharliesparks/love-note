@@ -25,6 +25,7 @@ export const SignUp = (): React.ReactElement => {
 		if (!firstName || !lastName || !email || !password) return setError('please enter all details')
 		setError('')
 
+		// TODO: Add loadding spinner for all of this
 		Meteor.call(
 			UserMethods.INSERT,
 			{ firstName, lastName, email, password },
@@ -33,7 +34,12 @@ export const SignUp = (): React.ReactElement => {
 				if (e) setError(e.reason)
 				// TODO: Log in here
 				// TODO: redirect to my notes
-				else navigate('../create-note')
+				else {
+					Meteor.loginWithPassword({ email }, password, (e) => {
+						if (e) setError(e.reason)
+						else navigate('../my-notes')
+					})
+				}
 			}
 		)
 	}

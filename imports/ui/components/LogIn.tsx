@@ -27,7 +27,7 @@ export const LogIn = (): React.ReactElement => {
 			// TODO: Type this + in sign up
 			if (e) setError(e.reason)
 			// TODO: redirect to my notes
-			else navigate('../create-note')
+			else navigate('../my-notes')
 		})
 	}
 
