@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import React from 'react'
 import { useNavigate } from 'react-router'
+import { TMeteorError } from '/shared/constants'
 
 export const LogIn = (): React.ReactElement => {
 	// TODO: Add redirect
@@ -23,9 +24,9 @@ export const LogIn = (): React.ReactElement => {
 		if (!email || !password) return setError('please enter all details')
 		setError('')
 
-		Meteor.loginWithPassword({ email }, password, (e) => {
-			// TODO: Type this + in sign up
-			if (e) setError(e.reason)
+		Meteor.loginWithPassword({ email }, password, (e: TMeteorError) => {
+			const error = e as Meteor.Error
+			if (e) setError(error.reason ?? 'There was an unknown error')
 			// TODO: redirect to my notes
 			else navigate('../my-notes')
 		})

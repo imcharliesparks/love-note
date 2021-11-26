@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import React from 'react'
-import { UserMethods } from '/shared/constants'
+import { TMeteorError, UserMethods } from '/shared/constants'
 import { useNavigate } from 'react-router'
 import { useTracker } from 'meteor/react-meteor-data'
 
@@ -26,22 +26,17 @@ export const SignUp = (): React.ReactElement => {
 		setError('')
 
 		// TODO: Add loadding spinner for all of this
-		Meteor.call(
-			UserMethods.INSERT,
-			{ firstName, lastName, email, password },
-			// TODO: Type meteor error
-			(e: any) => {
-				if (e) setError(e.reason)
-				// TODO: Log in here
-				// TODO: redirect to my notes
-				else {
-					Meteor.loginWithPassword({ email }, password, (e) => {
-						if (e) setError(e.reason)
-						else navigate('../my-notes')
-					})
-				}
+		Meteor.call(UserMethods.INSERT, { firstName, lastName, email, password }, (e: TMeteorError) => {
+			const error = e as Meteor.Error
+			if (e) setError(error.reason ?? 'There was an unknown error')
+			else {
+				Meteor.loginWithPassword({ email }, password, (e: TMeteorError) => {
+					const error = e as Meteor.Error
+					if (e) setError(error.reason ?? 'There was an unknown error')
+					else navigate('../my-notes')
+				})
 			}
-		)
+		})
 	}
 
 	// TODO: Do something better here

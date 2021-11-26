@@ -1,11 +1,10 @@
 import { Accounts } from 'meteor/accounts-base'
 import { check } from 'meteor/check'
 import { Meteor } from 'meteor/meteor'
-import { UserMethods } from '/shared/constants'
+import { TUserInsert, UserMethods } from '/shared/constants'
 
 Meteor.methods({
-	// TODO: Add type here
-	[UserMethods.INSERT](user: any) {
+	[UserMethods.INSERT](user: TUserInsert) {
 		check(user, Object)
 		const newUserId: string = Accounts.createUser({
 			email: user.email,
@@ -13,7 +12,6 @@ Meteor.methods({
 		})
 
 		Meteor.users.update(newUserId, {
-			// TODO: Type this as well
 			$set: {
 				userDetails: {
 					firstName: user.firstName,

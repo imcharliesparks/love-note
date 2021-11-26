@@ -1,8 +1,12 @@
-export type TUser = {
+import { Meteor } from 'meteor/meteor'
+
+export type TUserInsert = {
 	_id?: string
+	email: string
+	password?: string
 	firstName: string
 	lastName: string
-	partner?: string
+	partnerId?: string
 }
 
 export type TNote = {
@@ -11,6 +15,8 @@ export type TNote = {
 	content: string
 	createdAt: string | Date
 }
+
+export type TMeteorError = Meteor.Error | Error | TypeError | undefined
 
 export enum MongoCollections {
 	NOTES = 'notes'
