@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import React from 'react'
 import { NotesCollection } from '/imports/api/collections/notes'
-import { MongoCollections, TNote } from '/shared/constants'
+import { MongoCollections, NotesPubsAndSubs, TNote } from '/shared/constants'
 
 type NotesSubscriptionReturn = {
 	notes: TNote[] | []
@@ -13,10 +13,11 @@ export const MyNotes = (): React.ReactElement => {
 	const { notes, isLoading }: NotesSubscriptionReturn = useTracker((): NotesSubscriptionReturn => {
 		const resultObj = { notes: [], isLoading: true }
 
-		const handler = Meteor.subscribe(MongoCollections.NOTES)
+		const handler = Meteor.subscribe(NotesPubsAndSubs.PARTNER_NOTES)
 		if (!handler.ready()) return { ...resultObj, isLoading: true }
 
 		const notes: TNote[] = NotesCollection.find({}, { sort: { createdAt: 1 } }).fetch()
+		console.log('notes', notes)
 		return { notes, isLoading: false }
 	})
 

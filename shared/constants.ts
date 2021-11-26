@@ -33,3 +33,8 @@ export enum UserMethods {
 	REMOVE = 'users.remove',
 	UPDATE = 'users.update'
 }
+
+export enum NotesPubsAndSubs {
+	MY_NOTES = 'my_notes',
+	PARTNER_NOTES = 'partner_notes'
+}

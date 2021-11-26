@@ -3,6 +3,7 @@ import { check } from 'meteor/check'
 import { Meteor } from 'meteor/meteor'
 import { TUserInsert, UserMethods } from '/shared/constants'
 
+// TODO: Add update and remove methods
 Meteor.methods({
 	[UserMethods.INSERT](user: TUserInsert) {
 		check(user, Object)
