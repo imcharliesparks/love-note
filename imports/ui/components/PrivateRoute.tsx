@@ -10,12 +10,14 @@ type ProtectedRouteProps = {
 
 export const PrivateRoute = ({ children, ...rest }: ProtectedRouteProps) => {
 	const navigate = useNavigate()
-	const { user, isLoaded } = useTracker(() => ({
+	const { user, isLoggingIn } = useTracker(() => ({
 		user: Meteor.user(),
-		isLoaded: Meteor.loggingIn()
+		isLoggingIn: Meteor.loggingIn()
 	}))
 
-	if (isLoaded) return <h1>loading...</h1>
+	if (!user && !isLoggingIn) {
+		navigate('../')
+	}
 
-	return user ? children : navigate('../')
+	return children
 }
