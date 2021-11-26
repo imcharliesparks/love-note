@@ -21,5 +21,21 @@ Meteor.methods({
 				}
 			}
 		})
+	},
+	[UserMethods.ADD_PARTNER](partnerEmail: string) {
+		check(partnerEmail, String)
+		const foundUser = Meteor.users.findOne({ 'emails.address': partnerEmail })
+		if (foundUser) {
+			const currentUser = Meteor.user()
+			Meteor.users.update(this.userId!, {
+				$set: {
+					userDetails: {
+						// @ts-ignore
+						...currentUser.userDetails,
+						partnerId: foundUser._id
+					}
+				}
+			})
+		}
 	}
 })

@@ -7,6 +7,8 @@ import ErrorBoundary from './components/ErrorBoundary'
 import { MyNotes } from './components/MyNotes'
 import { PrivateRoute } from './components/PrivateRoute'
 import { Home } from './components/Home'
+import { AddPartner } from './components/AddPartner'
+import { PartnerNotes } from './components/PartnerNotes'
 
 export const App = () => (
 	<ErrorBoundary>
@@ -22,10 +24,26 @@ export const App = () => (
 					}
 				/>
 				<Route
+					path="/partner-notes"
+					element={
+						<PrivateRoute>
+							<PartnerNotes />
+						</PrivateRoute>
+					}
+				/>
+				<Route
 					path="/create-note"
 					element={
 						<PrivateRoute>
 							<CreateNote />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path="/add-partner"
+					element={
+						<PrivateRoute>
+							<AddPartner />
 						</PrivateRoute>
 					}
 				/>

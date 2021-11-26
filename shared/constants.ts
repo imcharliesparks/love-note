@@ -18,6 +18,11 @@ export type TNote = {
 
 export type TMeteorError = Meteor.Error | Error | TypeError | undefined
 
+export type NotesSubscriptionReturn = {
+	notes: TNote[] | []
+	isLoading: boolean
+}
+
 export enum MongoCollections {
 	NOTES = 'notes'
 }
@@ -31,7 +36,8 @@ export enum NotesMethods {
 export enum UserMethods {
 	INSERT = 'users.insert',
 	REMOVE = 'users.remove',
-	UPDATE = 'users.update'
+	UPDATE = 'users.update',
+	ADD_PARTNER = 'add.partner'
 }
 
 export enum NotesPubsAndSubs {

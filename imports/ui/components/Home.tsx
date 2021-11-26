@@ -55,6 +55,20 @@ export const Home = (): React.ReactElement => {
 							</Link>
 						</nav>
 					</button>
+					<button type="button">
+						<nav>
+							<Link style={linkStyles} to="/partner-notes">
+								Partner Notes
+							</Link>
+						</nav>
+					</button>
+					<button type="button">
+						<nav>
+							<Link style={linkStyles} to="/add-partner">
+								Add Partner
+							</Link>
+						</nav>
+					</button>
 					<button type="button" onClick={handleSignOut}>
 						Sign Out
 					</button>
