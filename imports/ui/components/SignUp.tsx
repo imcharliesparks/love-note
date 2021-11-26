@@ -1,11 +1,10 @@
 import { Meteor } from 'meteor/meteor'
-import { Accounts } from 'meteor/accounts-base'
 import React from 'react'
 import { UserMethods } from '/shared/constants'
 import { useNavigate } from 'react-router'
+import { useTracker } from 'meteor/react-meteor-data'
 
-export const AuthPage = (): React.ReactElement => {
-	// TODO: Add redirect
+export const SignUp = (): React.ReactElement => {
 	// TODO: Add email and password validation
 	const navigate = useNavigate()
 	const [firstName, setFirstName] = React.useState<string>('')
@@ -13,8 +12,14 @@ export const AuthPage = (): React.ReactElement => {
 	const [email, setEmail] = React.useState<string>('')
 	const [password, setPassword] = React.useState<string>('')
 	const [error, setError] = React.useState<string>('')
+	const user = useTracker(() => Meteor.user())
 
-	const handleCreateUser = (e: React.FormEvent<HTMLFormElement>) => {
+	React.useEffect(() => {
+		// TODO: Make this more seamless
+		if (user) navigate('../create-note')
+	}, [user])
+
+	const handleCreateUser = (e: React.FormEvent<HTMLFormElement>): void => {
 		e.preventDefault()
 		// TODO: Make this better
 		if (!firstName || !lastName || !email || !password) return setError('please enter all details')
@@ -26,6 +31,7 @@ export const AuthPage = (): React.ReactElement => {
 			// TODO: Type meteor error
 			(e: any) => {
 				if (e) setError(e.reason)
+				// TODO: Log in here
 				// TODO: redirect to my notes
 				else navigate('../create-note')
 			}

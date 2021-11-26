@@ -7,12 +7,20 @@ Meteor.methods({
 	// TODO: Add type here
 	[UserMethods.INSERT](user: any) {
 		check(user, Object)
-		const result = Accounts.createUser({
+		const newUserId: string = Accounts.createUser({
 			email: user.email,
 			password: user.password
 		})
 
-		console.log('result', result)
-		return result
+		Meteor.users.update(newUserId, {
+			// TODO: Type this as well
+			$set: {
+				userDetails: {
+					firstName: user.firstName,
+					lastName: user.lastName,
+					partnerId: null
+				}
+			}
+		})
 	}
 })

@@ -7,6 +7,7 @@ export type TUser = {
 
 export type TNote = {
 	_id?: string
+	userId?: string
 	content: string
 	createdAt: string | Date
 }

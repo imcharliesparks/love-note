@@ -8,9 +8,9 @@ Meteor.methods({
 		check(content, String)
 		const newNote: TNote = {
 			content,
-			createdAt: Date()
+			createdAt: new Date().toISOString(),
+			userId: this.userId!
 		}
-		console.log('newNote', newNote)
 		NotesCollection.insert(newNote)
 	},
 	[NotesMethods.REMOVE](id: string) {

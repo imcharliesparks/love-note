@@ -4,6 +4,6 @@ import { MongoCollections } from '/shared/constants'
 
 Meteor.publish(MongoCollections.NOTES, function publishNotes() {
 	// TODO: Show notes for user and partner
-	// NotesCollection.find({ userId: this.userId })
-	NotesCollection.find()
+	const foundNotes = NotesCollection.find({ userId: this.userId! })
+	return foundNotes
 })
