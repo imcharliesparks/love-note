@@ -6,12 +6,13 @@ import { CreateNote } from './components/CreateNote'
 import ErrorBoundary from './components/ErrorBoundary'
 import { MyNotes } from './components/MyNotes'
 import { PrivateRoute } from './components/PrivateRoute'
+import { Home } from './components/Home'
 
 export const App = () => (
 	<ErrorBoundary>
 		<Router>
 			<Routes>
-				<Route path="/" element={<h1>home</h1>} />
+				<Route path="/" element={<Home />} />
 				<Route
 					path="/my-notes"
 					element={
