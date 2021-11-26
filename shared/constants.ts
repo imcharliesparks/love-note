@@ -52,3 +52,7 @@ export enum NotesPubsAndSubs {
 	MY_NOTES = 'my_notes',
 	PARTNER_NOTES = 'partner_notes'
 }
+
+export enum UserDetailsMethods {
+	CHECK_FOR_PARTNER = 'check_for_parter'
+}

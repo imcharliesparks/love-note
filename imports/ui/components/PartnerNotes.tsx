@@ -2,10 +2,25 @@ import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import * as React from 'react'
 import { NotesCollection } from '/imports/api/collections/notes'
-import { NotesPubsAndSubs, NotesSubscriptionReturn, TNote } from '/shared/constants'
+import {
+	NotesPubsAndSubs,
+	NotesSubscriptionReturn,
+	TMeteorError,
+	TNote,
+	UserDetailsMethods
+} from '/shared/constants'
 
-// TODO: Fix so it doesn't show that your partner doesn't have notes if you're not set up with a partner
 export const PartnerNotes = (): React.ReactElement => {
+	const [error, setError] = React.useState<string>('')
+	Meteor.call(UserDetailsMethods.CHECK_FOR_PARTNER, (e: TMeteorError) => {
+		if (e) {
+			const error = e as Meteor.Error
+			setError(error.reason ?? 'There was an error finding your partner')
+		} else {
+			setError('')
+		}
+	})
+
 	const { notes, isLoading }: NotesSubscriptionReturn = useTracker((): NotesSubscriptionReturn => {
 		const resultObj = { notes: [], isLoading: true }
 
@@ -17,6 +32,7 @@ export const PartnerNotes = (): React.ReactElement => {
 	})
 
 	if (isLoading) return <h1>notes loading</h1>
+	if (error) return <h1>{error}</h1>
 
 	return notes.length ? (
 		<ul>

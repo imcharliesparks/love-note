@@ -50,7 +50,8 @@
         "no-console": "off",
         "no-shadow": "off",
         "consistent-return": "off",
-        "@typescript-eslint/ban-ts-comment": "off"
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
     },
     "ignorePatterns": [
         "node_modules",
