@@ -9,6 +9,13 @@ export type TUserInsert = {
 	partnerId?: string
 }
 
+export type TUserDetails = {
+	userId: string
+	firstName: string
+	lastName: string
+	partnerId?: string | null
+}
+
 export type TNote = {
 	_id?: string
 	userId?: string
@@ -24,7 +31,8 @@ export type NotesSubscriptionReturn = {
 }
 
 export enum MongoCollections {
-	NOTES = 'notes'
+	NOTES = 'notes',
+	USER_DETAILS = 'user_details'
 }
 
 export enum NotesMethods {

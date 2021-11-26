@@ -1,41 +1,41 @@
 import { Accounts } from 'meteor/accounts-base'
 import { check } from 'meteor/check'
 import { Meteor } from 'meteor/meteor'
-import { TUserInsert, UserMethods } from '/shared/constants'
+import { UserDetailsCollection } from '../collections/userDetails'
+import { TUserDetails, TUserInsert, UserMethods } from '/shared/constants'
 
 // TODO: Add update and remove methods
 Meteor.methods({
 	[UserMethods.INSERT](user: TUserInsert) {
 		check(user, Object)
-		const newUserId: string = Accounts.createUser({
-			email: user.email,
-			password: user.password
+		const { email, password, firstName, lastName } = user
+		const userId: string = Accounts.createUser({
+			email,
+			password
 		})
 
-		Meteor.users.update(newUserId, {
-			$set: {
-				userDetails: {
-					firstName: user.firstName,
-					lastName: user.lastName,
-					partnerId: null
-				}
-			}
-		})
+		const newUserDetails: TUserDetails = {
+			userId,
+			firstName,
+			lastName,
+			partnerId: null
+		}
+		UserDetailsCollection.insert(newUserDetails)
 	},
 	[UserMethods.ADD_PARTNER](partnerEmail: string) {
 		check(partnerEmail, String)
 		const foundUser = Meteor.users.findOne({ 'emails.address': partnerEmail })
 		if (foundUser) {
-			const currentUser = Meteor.user()
-			Meteor.users.update(this.userId!, {
-				$set: {
-					userDetails: {
-						// @ts-ignore
-						...currentUser.userDetails,
-						partnerId: foundUser._id
+			UserDetailsCollection.update(
+				{ userId: this.userId! },
+				{
+					$set: {
+						partnerId: foundUser?._id
 					}
 				}
-			})
+			)
+		} else {
+			throw new Meteor.Error('400', 'No user with that email address was found.')
 		}
 	}
 })
