@@ -21,7 +21,6 @@ Meteor.methods({
 		check(id, String)
 		check(newContent, String)
 		const foundNote: TNote | undefined = NotesCollection.findOne(id)
-		console.log('foundNote', foundNote)
 		if (!foundNote) {
 			throw new Meteor.Error('No note with that ID was found')
 		}

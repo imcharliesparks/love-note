@@ -1,6 +1,8 @@
 // import { Meteor } from 'meteor/meteor'
 // import { LinksCollection } from '/imports/api/links'
-import '/imports/api/methods/NotesMethods'
+import '../imports/api/collections'
+import '../imports/api/methods'
+import '../imports/api/publications'
 
 // function insertLink(title: string, url: string) {
 // 	LinksCollection.insert({ title, url, createdAt: new Date() })

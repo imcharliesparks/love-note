@@ -20,3 +20,9 @@ export enum NotesMethods {
 	REMOVE = 'notes.remove',
 	UPDATE = 'notes.update'
 }
+
+export enum UserMethods {
+	INSERT = 'users.insert',
+	REMOVE = 'users.remove',
+	UPDATE = 'users.update'
+}
