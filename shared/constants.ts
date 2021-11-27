@@ -10,6 +10,7 @@ export type TUserInsert = {
 }
 
 export type TUserDetails = {
+	_id?: string
 	userId: string
 	firstName: string
 	lastName: string
@@ -21,6 +22,23 @@ export type TNote = {
 	userId?: string
 	content: string
 	createdAt: string | Date
+}
+
+export type TUserBasicUserData = {
+	userId: string
+	firstName: string
+	lastName: string
+	partnerId: string | null
+}
+
+export type TUserDataHookResult = [TUserBasicUserData?, TUserBasicUserData?]
+
+export type TPartnerDataHookResult = {
+	_id?: string
+	email: string
+	firstName: string
+	lastName: string
+	partnerId?: string
 }
 
 export type TMeteorError = Meteor.Error | Error | TypeError | undefined
@@ -51,6 +69,11 @@ export enum UserMethods {
 export enum NotesPubsAndSubs {
 	MY_NOTES = 'my_notes',
 	PARTNER_NOTES = 'partner_notes'
+}
+
+export enum UserDetailsPubsAndSubs {
+	MY_USER_DETAILS = 'my_user_details',
+	PARTNER_USER_DETAILS = 'partner_user_details'
 }
 
 export enum UserDetailsMethods {

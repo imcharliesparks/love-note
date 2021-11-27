@@ -54,6 +54,7 @@ export const LogIn = (): React.ReactElement => {
 							value={email}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
 							label="email"
+							type="email"
 						/>
 					</FormControl>
 					<FormControl style={authInputStyles}>
@@ -63,6 +64,7 @@ export const LogIn = (): React.ReactElement => {
 							value={password}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
 							label="password"
+							type="password"
 						/>
 					</FormControl>
 					<Button type="submit" style={authButtonStyles} variant="contained">

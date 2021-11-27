@@ -51,39 +51,11 @@ export const SignUp = (): React.ReactElement => {
 	if (Meteor.user()) return <h1>You are already registered!</h1>
 
 	return (
-		// <form onSubmit={handleCreateUser}>
-		// 	<input
-		// 		value={firstName}
-		// 		onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
-		// 		type="text"
-		// 		placeholder="enter your first name"
-		// 	/>
-		// 	<input
-		// 		value={lastName}
-		// 		onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
-		// 		type="text"
-		// 		placeholder="enter your last name"
-		// 	/>
-		// 	<input
-		// 		value={email}
-		// 		onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-		// 		type="email"
-		// 		placeholder="enter your email"
-		// 	/>
-		// 	<input
-		// 		value={password}
-		// 		onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-		// 		type="password"
-		// 		placeholder="enter your password"
-		// 	/>
-		// 	<button type="submit">Submit</button>
-		// 	{error && <p>{error}</p>}
-		// </form>
 		<div style={authOuterDivStyles}>
 			<div style={authInnerDivStyles}>
 				<form onSubmit={handleCreateUser} style={authInputContainerStyles}>
 					<Typography style={{ textAlign: 'center' }} variant="h5" gutterBottom component="div">
-						Log In
+						Sign Up
 					</Typography>
 					<FormControl style={authInputStyles}>
 						<InputLabel htmlFor="component-outlined">First Name</InputLabel>
@@ -110,6 +82,7 @@ export const SignUp = (): React.ReactElement => {
 							value={email}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
 							label="email"
+							type="email"
 						/>
 					</FormControl>
 					<FormControl style={authInputStyles}>
@@ -119,6 +92,7 @@ export const SignUp = (): React.ReactElement => {
 							value={password}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
 							label="password"
+							type="password"
 						/>
 					</FormControl>
 					<Button type="submit" style={authButtonStyles} variant="contained">

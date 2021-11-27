@@ -12,6 +12,7 @@ export const Home = (): React.ReactElement => {
 	const navigate = useNavigate()
 	const user = Meteor.user()
 	const isLoggingIn = Meteor.loggingIn()
+
 	const handleSignOut = () => {
 		// TODO: Add error handling here
 		// @ts-ignore

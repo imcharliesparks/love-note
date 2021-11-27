@@ -1,1 +1,2 @@
 import './notesPublications'
+import './userDetailsPublications'
