@@ -11,6 +11,10 @@ import {
 } from '@mui/material'
 import LoginIcon from '@mui/icons-material/Login'
 import GroupAddIcon from '@mui/icons-material/GroupAdd'
+import LogoutIcon from '@mui/icons-material/Logout'
+import NoteAddIcon from '@mui/icons-material/NoteAdd'
+import StickyNote2Icon from '@mui/icons-material/StickyNote2'
+import PersonIcon from '@mui/icons-material/Person'
 import { useNavigate } from 'react-router-dom'
 
 type SideDrawerProps = {
@@ -38,33 +42,48 @@ export const SideDrawer = ({
 				onClick={() => toggleDrawer(false)}
 				onKeyDown={() => toggleDrawer(false)}
 				component="div">
+				<List>
+					<ListItem onClick={() => navigate('../')} button>
+						<ListItemText primary="Welcome" />
+					</ListItem>
+				</List>
+				<Divider />
 				{isLoggedIn ? (
 					<>
 						<List>
-							<ListItem button>
+							<ListItem onClick={() => navigate('../my-notes')} button>
 								<ListItemIcon>
-									<LoginIcon />
+									<StickyNote2Icon />
 								</ListItemIcon>
 								<ListItemText primary="My Notes" />
 							</ListItem>
 						</List>
 						<List>
-							<ListItem button>
+							<ListItem onClick={() => navigate('../partner-notes')} button>
 								<ListItemIcon>
-									<LoginIcon />
+									{/* TODO: Find a better icon for this */}
+									<PersonIcon />
 								</ListItemIcon>
 								<ListItemText primary="My Partner's Notes" />
 							</ListItem>
 						</List>
 						<List>
-							<ListItem button>
+							<ListItem onClick={() => navigate('../create-note')} button>
 								<ListItemIcon>
-									<LoginIcon />
+									<NoteAddIcon />
 								</ListItemIcon>
 								<ListItemText primary="Create Note" />
 							</ListItem>
 						</List>
 						<Divider />
+						<List>
+							<ListItem onClick={() => Meteor.logout()} button>
+								<ListItemIcon>
+									<LogoutIcon />
+								</ListItemIcon>
+								<ListItemText primary="Sign Out" />
+							</ListItem>
+						</List>
 					</>
 				) : (
 					<>

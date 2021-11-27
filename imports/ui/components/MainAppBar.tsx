@@ -26,6 +26,7 @@ export const MainAppBar = ({ toggleDrawer, isLoggedIn }: MainAppBarProps): React
 					sx={{ mr: 2 }}>
 					<MenuIcon />
 				</IconButton>
+				{/* TODO: Convert to react router link */}
 				<Link style={{ color: 'white' }} href="/" variant="h6" component="div" sx={{ flexGrow: 1 }}>
 					LoveNote
 				</Link>
