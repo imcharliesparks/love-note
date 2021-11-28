@@ -1,6 +1,9 @@
+import { List } from '@mui/material'
 import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import * as React from 'react'
+import { usePartnerNotes } from '../hooks/usePartnerNotes'
+import { Note } from './Note'
 import { NotesCollection } from '/imports/api/collections/notes'
 import {
 	NotesPubsAndSubs,
@@ -12,6 +15,7 @@ import {
 
 export const PartnerNotes = (): React.ReactElement => {
 	const [error, setError] = React.useState<string>('')
+	const [notes, isLoading]: [TNote[], boolean] = usePartnerNotes()
 	Meteor.call(UserDetailsMethods.CHECK_FOR_PARTNER, (e: TMeteorError) => {
 		if (e) {
 			const error = e as Meteor.Error
@@ -21,25 +25,15 @@ export const PartnerNotes = (): React.ReactElement => {
 		}
 	})
 
-	const { notes, isLoading }: NotesSubscriptionReturn = useTracker((): NotesSubscriptionReturn => {
-		const resultObj = { notes: [], isLoading: true }
-
-		const handler = Meteor.subscribe(NotesPubsAndSubs.PARTNER_NOTES)
-		if (!handler.ready()) return { ...resultObj, isLoading: true }
-
-		const notes: TNote[] = NotesCollection.find({}, { sort: { createdAt: 1 } }).fetch()
-		return { notes, isLoading: false }
-	})
-
 	if (isLoading) return <h1>notes loading</h1>
 	if (error) return <h1>{error}</h1>
 
 	return notes.length ? (
-		<ul>
+		<List sx={{ width: '100%', bgcolor: 'background.paper', marginTop: '12px' }}>
 			{notes.map((note: TNote) => (
-				<li key={note._id}>{note.content}</li>
+				<Note content={note.content} createdAt={note.createdAt as string} key={note._id!} />
 			))}
-		</ul>
+		</List>
 	) : (
 		<h1>Your partner doesn&apos;t have any notes!</h1>
 	)
