@@ -102,7 +102,7 @@ export const SignUp = (): React.ReactElement => {
 					{error && <Typography style={{ textAlign: 'center', color: 'red' }}>{error}</Typography>}
 				</form>
 			</div>
-			<div style={{ width: 300, margin: '40px auto' }}>
+			<div style={{ width: 300, margin: '24px auto' }}>
 				<Link style={{ textDecoration: 'none' }} to="/log-in">
 					Already have an account? Log in instead.
 				</Link>

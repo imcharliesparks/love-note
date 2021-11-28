@@ -1,17 +1,9 @@
 import { List } from '@mui/material'
 import { Meteor } from 'meteor/meteor'
-import { useTracker } from 'meteor/react-meteor-data'
 import * as React from 'react'
 import { usePartnerNotes } from '../hooks/usePartnerNotes'
 import { Note } from './Note'
-import { NotesCollection } from '/imports/api/collections/notes'
-import {
-	NotesPubsAndSubs,
-	NotesSubscriptionReturn,
-	TMeteorError,
-	TNote,
-	UserDetailsMethods
-} from '/shared/constants'
+import { TMeteorError, TNote, UserDetailsMethods } from '/shared/constants'
 
 export const PartnerNotes = (): React.ReactElement => {
 	const [error, setError] = React.useState<string>('')

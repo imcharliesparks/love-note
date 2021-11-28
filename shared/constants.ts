@@ -31,7 +31,7 @@ export type TUserBasicUserData = {
 	partnerId: string | null
 }
 
-export type TUserDataHookResult = [TUserBasicUserData?, TUserBasicUserData?]
+export type TUserDataHookResult = TUserBasicUserData[]
 
 export type TPartnerDataHookResult = {
 	_id?: string

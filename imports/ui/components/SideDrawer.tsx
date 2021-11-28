@@ -16,6 +16,8 @@ import NoteAddIcon from '@mui/icons-material/NoteAdd'
 import StickyNote2Icon from '@mui/icons-material/StickyNote2'
 import PersonIcon from '@mui/icons-material/Person'
 import { useNavigate } from 'react-router-dom'
+import { TUserDataHookResult } from '/shared/constants'
+import { userUserData } from '../hooks/useUserData'
 
 type SideDrawerProps = {
 	isOpen: boolean
@@ -29,6 +31,7 @@ export const SideDrawer = ({
 	isLoggedIn
 }: SideDrawerProps): React.ReactElement => {
 	const navigate = useNavigate()
+	const [userDetails]: TUserDataHookResult = userUserData()
 
 	return (
 		<SwipeableDrawer
@@ -59,13 +62,23 @@ export const SideDrawer = ({
 							</ListItem>
 						</List>
 						<List>
-							<ListItem onClick={() => navigate('../partner-notes')} button>
-								<ListItemIcon>
-									{/* TODO: Find a better icon for this */}
-									<PersonIcon />
-								</ListItemIcon>
-								<ListItemText primary="My Partner's Notes" />
-							</ListItem>
+							{userDetails?.partnerId ? (
+								<ListItem onClick={() => navigate('../partner-notes')} button>
+									<ListItemIcon>
+										{/* TODO: Find a better icon for this */}
+										<PersonIcon />
+									</ListItemIcon>
+									<ListItemText primary="My Partner's Notes" />
+								</ListItem>
+							) : (
+								<ListItem onClick={() => navigate('../add-partner')} button>
+									<ListItemIcon>
+										{/* TODO: Find a better icon for this */}
+										<PersonIcon />
+									</ListItemIcon>
+									<ListItemText primary="Add My Partner" />
+								</ListItem>
+							)}
 						</List>
 						<List>
 							<ListItem onClick={() => navigate('../create-note')} button>

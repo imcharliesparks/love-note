@@ -74,7 +74,7 @@ export const LogIn = (): React.ReactElement => {
 					{error && <Typography style={{ textAlign: 'center', color: 'red' }}>{error}</Typography>}
 				</form>
 			</div>
-			<div style={{ width: 300, margin: '40px auto' }}>
+			<div style={{ width: 300, margin: '24px auto' }}>
 				<Link style={{ textDecoration: 'none' }} to="/sign-up">
 					Don&apos;t have an account? Sign up instead.
 				</Link>

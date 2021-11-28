@@ -1,3 +1,4 @@
+import { Button, Typography } from '@mui/material'
 import { Meteor } from 'meteor/meteor'
 import * as React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -21,60 +22,30 @@ export const Home = (): React.ReactElement => {
 		})
 	}
 
+	if (user) navigate('../my-notes')
+
 	return (
-		<div>
-			{user === null && !isLoggingIn ? (
-				<div>
-					<button type="button">
-						<nav>
-							<Link style={linkStyles} to="/log-in">
-								Log In
-							</Link>
-						</nav>
-					</button>
-					<button type="button">
-						<nav>
-							<Link style={linkStyles} to="/sign-up">
-								Sign Up
-							</Link>
-						</nav>
-					</button>
-				</div>
-			) : (
-				<div>
-					<button type="button">
-						<nav>
-							<Link style={linkStyles} to="/create-note">
-								Create Note
-							</Link>
-						</nav>
-					</button>
-					<button type="button">
-						<nav>
-							<Link style={linkStyles} to="/my-notes">
-								My Notes
-							</Link>
-						</nav>
-					</button>
-					<button type="button">
-						<nav>
-							<Link style={linkStyles} to="/partner-notes">
-								Partner Notes
-							</Link>
-						</nav>
-					</button>
-					<button type="button">
-						<nav>
-							<Link style={linkStyles} to="/add-partner">
-								Add Partner
-							</Link>
-						</nav>
-					</button>
-					<button type="button" onClick={handleSignOut}>
-						Sign Out
-					</button>
-				</div>
-			)}
+		<div style={{ marginTop: 28, textAlign: 'center' }}>
+			<div style={{ margin: '12px 0px' }}>
+				<Typography variant="h5">Welcome to LoveNote!</Typography>
+			</div>
+			<div>
+				<Typography style={{ marginBottom: 24 }}>
+					Please log-in or sign-up to get started
+				</Typography>
+				<Button
+					onClick={() => navigate('../log-in')}
+					style={{ width: 100, margin: '0 5px' }}
+					variant="contained">
+					Log In
+				</Button>
+				<Button
+					onClick={() => navigate('../sign-up')}
+					style={{ width: 100, margin: '0 5px' }}
+					variant="contained">
+					Sign Up
+				</Button>
+			</div>
 		</div>
 	)
 }
