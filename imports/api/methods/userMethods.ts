@@ -24,6 +24,7 @@ Meteor.methods({
 	},
 	[UserMethods.ADD_PARTNER](partnerEmail: string) {
 		check(partnerEmail, String)
+		// TODO: Add some sort of error if the user already has another partner
 		const foundUser = Meteor.users.findOne({ 'emails.address': partnerEmail })
 		if (foundUser) {
 			UserDetailsCollection.update(

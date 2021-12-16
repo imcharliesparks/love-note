@@ -1,4 +1,13 @@
-import { Button, FormControl, InputLabel, OutlinedInput, Typography } from '@mui/material'
+import {
+	Alert,
+	Button,
+	FormControl,
+	InputLabel,
+	OutlinedInput,
+	Snackbar,
+	Typography
+} from '@mui/material'
+import { Accounts } from 'meteor/accounts-base'
 import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import React from 'react'
@@ -19,6 +28,7 @@ export const LogIn = (): React.ReactElement => {
 	const [email, setEmail] = React.useState<string>('')
 	const [password, setPassword] = React.useState<string>('')
 	const [error, setError] = React.useState<string>('')
+	const [isToastOpen, setIsToastOpen] = React.useState<boolean>(false)
 	const user = useTracker(() => Meteor.user())
 
 	React.useEffect(() => {
@@ -38,6 +48,19 @@ export const LogIn = (): React.ReactElement => {
 			// TODO: redirect to my notes
 			else navigate('../my-notes')
 		})
+	}
+
+	// TODO: Configure this properly
+	const handlePasswordReset = (e: React.SyntheticEvent<HTMLButtonElement>) => {
+		e.preventDefault()
+		if (!email) {
+			setError('Please enter your email address')
+		} else {
+			setError('')
+			Accounts.forgotPassword({ email })
+			setIsToastOpen(true)
+			console.log('isToastOpen', isToastOpen)
+		}
 	}
 
 	return (
@@ -67,11 +90,21 @@ export const LogIn = (): React.ReactElement => {
 							type="password"
 						/>
 					</FormControl>
-					<Button type="submit" style={authButtonStyles} variant="contained">
+					<Button
+						type="submit"
+						style={{ ...authButtonStyles, marginBottom: 10 }}
+						variant="contained">
 						Log In
 					</Button>
+					<Button style={{ marginBottom: 10 }} onClick={handlePasswordReset}>
+						Forgot Password
+					</Button>
 					{/* TODO: Make specific errors here and consume properly in inputs */}
-					{error && <Typography style={{ textAlign: 'center', color: 'red' }}>{error}</Typography>}
+					{error && (
+						<Typography style={{ textAlign: 'center', color: 'red', marginBottom: 10 }}>
+							{error}
+						</Typography>
+					)}
 				</form>
 			</div>
 			<div style={{ width: 300, margin: '24px auto' }}>
@@ -79,6 +112,12 @@ export const LogIn = (): React.ReactElement => {
 					Don&apos;t have an account? Sign up instead.
 				</Link>
 			</div>
+			{/* TODO: Decentralize snackbars */}
+			<Snackbar open={isToastOpen} autoHideDuration={6000} onClose={() => setIsToastOpen(false)}>
+				<Alert variant="filled" severity="info">
+					A link to reset your password has been sent to the email you entered.
+				</Alert>
+			</Snackbar>
 		</div>
 	)
 }
