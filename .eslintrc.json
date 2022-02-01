@@ -51,7 +51,8 @@
         "no-shadow": "off",
         "consistent-return": "off",
         "@typescript-eslint/ban-ts-comment": "off",
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "no-nested-ternary": "off"
     },
     "ignorePatterns": [
         "node_modules",

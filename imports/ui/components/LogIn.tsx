@@ -59,7 +59,6 @@ export const LogIn = (): React.ReactElement => {
 			setError('')
 			Accounts.forgotPassword({ email })
 			setIsToastOpen(true)
-			console.log('isToastOpen', isToastOpen)
 		}
 	}
 

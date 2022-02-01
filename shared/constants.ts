@@ -41,11 +41,16 @@ export type TPartnerDataHookResult = {
 	partnerId?: string
 }
 
-export type TMeteorError = Meteor.Error | Error | TypeError | undefined
+export type TMeteorError = Meteor.Error | Error | TypeError | undefined | null
 
 export type NotesSubscriptionReturn = {
 	notes: TNote[] | []
 	isLoading: boolean
+}
+
+export enum NoteType {
+	USER_NOTE = 'USER_NOTE',
+	PARTNER_NOTE = 'PARTNER_NOTE'
 }
 
 export enum MongoCollections {

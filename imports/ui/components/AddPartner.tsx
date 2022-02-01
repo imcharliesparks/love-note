@@ -32,6 +32,7 @@ export const AddPartner = (): React.ReactElement => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		setError('')
+		// TODO: Add confirmation message
 		Meteor.call(UserMethods.ADD_PARTNER, email, (e: TMeteorError) => {
 			const error = e as Meteor.Error
 			if (error) setError(error.reason ?? 'There was an error adding your partner')

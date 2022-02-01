@@ -2,19 +2,26 @@ import { Button, List } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMyNotes } from '../hooks/useMyNotes'
+import { LoadingSpinner } from './LoadingSpinner'
 import { Note } from './Note'
-import { TNote } from '/shared/constants'
+import { NoteType, TNote } from '/shared/constants'
 
 export const MyNotes = (): React.ReactElement => {
 	const [notes, isLoading]: [TNote[], boolean] = useMyNotes()
 	const navigate = useNavigate()
 
-	if (isLoading) return <h1>notes loading</h1>
-
-	return notes.length ? (
+	return isLoading ? (
+		<LoadingSpinner>Loading notes...</LoadingSpinner>
+	) : notes.length ? (
 		<List sx={{ width: '100%', bgcolor: 'background.paper', marginTop: '12px' }}>
 			{notes.map((note: TNote) => (
-				<Note content={note.content} createdAt={note.createdAt as string} key={note._id!} />
+				<Note
+					content={note.content}
+					createdAt={note.createdAt as string}
+					key={note._id!}
+					id={note._id!}
+					noteType={NoteType.USER_NOTE}
+				/>
 			))}
 		</List>
 	) : (

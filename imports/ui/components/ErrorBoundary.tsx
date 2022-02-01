@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from '@mui/material'
 
 export interface ErrorBoundaryProps {
 	children: React.ReactElement
@@ -25,7 +26,14 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
 	render() {
 		if (this.state.hasError) {
-			return <h1>Something went wrong 🚣‍♀️</h1>
+			return (
+				<div>
+					<h1>Something went wrong 🚣‍♀️</h1>
+					<Link component="button" variant="body2" href="/my-notes">
+						Go Home
+					</Link>
+				</div>
+			)
 		}
 
 		return this.props.children

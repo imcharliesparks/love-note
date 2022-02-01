@@ -4,7 +4,6 @@ import { Meteor } from 'meteor/meteor'
 import { SignUp } from './components/SignUp'
 import { LogIn } from './components/LogIn'
 import { CreateNote } from './components/CreateNote'
-import ErrorBoundary from './components/ErrorBoundary'
 import { MyNotes } from './components/MyNotes'
 import { PrivateRoute } from './components/PrivateRoute'
 import { Home } from './components/Home'
@@ -12,6 +11,8 @@ import { AddPartner } from './components/AddPartner'
 import { PartnerNotes } from './components/PartnerNotes'
 import { MainAppBar } from './components/MainAppBar'
 import { SideDrawer } from './components/SideDrawer'
+import { EditNote } from './components/EditNote'
+import ErrorBoundary from './components/ErrorBoundary'
 
 export const App = () => {
 	const user = Meteor.user()
@@ -46,6 +47,14 @@ export const App = () => {
 						element={
 							<PrivateRoute>
 								<CreateNote />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/edit-note"
+						element={
+							<PrivateRoute>
+								<EditNote />
 							</PrivateRoute>
 						}
 					/>
